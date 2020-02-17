@@ -7,11 +7,11 @@ const Voter = require('./shcema');
 connect(); // To the database
 
 // Create some faculty
-const harcourt = new Professor({
-  name: 'Ed Harcourt',
-  rank: 'Full',
-  started: 2003,
-  courses: [140, 220, 345, 362, 364]
+const harcourt = new Voter({
+  firstName: 'Ed Harcourt',
+  lastName: 'Full',
+  zip: 2003,
+  history: [140, 220, 345, 362, 364]
 });
 
 // Delete any previous data
