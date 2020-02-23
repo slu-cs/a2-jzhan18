@@ -24,7 +24,7 @@ file.on('line',function(line) {
     zip: info[2],
     history: info[3]
     });
-  )
+  );
 });
 
 file.on('close', funciton(){
