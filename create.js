@@ -28,13 +28,10 @@ file.on('line',function(line) {
 });
 
 file.on('close', funciton(){
-    process.exit(0);
-})
-
-// Delete any previous data
-mongoose.connection.dropDatabase(function() {
-  const saves = voters.map(d => d.save());
-  Promise.all(saves)
-    .then(() => console.log('Database is ready.'))
-    .catch(error => console.log(error.stack));
+  mongoose.connection.dropDatabase(function() {
+    const saves = voters.map(d => d.save());
+    Promise.all(saves)
+      .then(() => console.log('Database is ready.'))
+      .catch(error => console.log(error.stack));
+  });
 });
