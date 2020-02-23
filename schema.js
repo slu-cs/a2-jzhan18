@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 const Voter = new mongoose.Schema({
   firstName: String,
   lastName: String,
-  zip: Number,
+  zip: String,
   history: String
 });
 
