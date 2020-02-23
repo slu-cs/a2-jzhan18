@@ -27,11 +27,9 @@ file.on('line',function(line) {
 });
 
 file.on('close', function() {
-  process.exit(0);
+  mongoose.connection.dropDatabase()
+    .then(() => voters.map(v => v.save()))
+    .then(() => mongoose.connection.close())
+    .then(() => console.log('Database is ready.'))
+    .catch(error => console.error(error.stack));
 });
-
-mongoose.connection.dropDatabase()
-  .then(() => voters.map(v => v.save()))
-  .then(() => mongoose.connection.close())
-  .then(() => console.log('Database is ready.'))
-  .catch(error => console.error(error.stack));
