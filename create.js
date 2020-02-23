@@ -9,28 +9,29 @@ connect(); // To the database
 const readline = require('readline');
 const fs = require('fs');
 // File configuration
-const file = readline.createInterface({
+const file = readline.createInterface ({
   input: fs.createReadStream('./voters.csv')
 });
 // Create voters
 const voters = [];
 
 // Asynchronous line-by-line input
-file.on('line', function(line){
-  const info = line.split(',');
-  voters.push(new Voter({
-    firstName: info[0],
-    lastName: info[1],
-    zip: info[2],
-    history: info[3]
-    });
-  );
-});
-
-// End the program when the file closes
-file.on('close', function() {
-  process.exit(0);
-});
+file.on('line')
+  .then(function(line) {
+    const info = line.split(',');
+    voters.push(new Voter({
+      firstName: info[0],
+      lastName: info[1],
+      zip: info[2],
+      history: info[3])
+      });
+    )
+    return file.on('close');
+  )
+  .then(function() {
+    process.exit(0);
+  })
+  .catch(error => console.error(error.stack));
 
 // Delete any previous data
 mongoose.connection.dropDatabase(function() {
