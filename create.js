@@ -10,7 +10,7 @@ const readline = require('readline');
 const fs = require('fs');
 // File configuration
 const file = readline.createInterface ({
-  input: fs.createReadStream('./voters.csv')
+  input: fs.createReadStream('voters.csv')
 });
 // Create voters
 const voters = [];
