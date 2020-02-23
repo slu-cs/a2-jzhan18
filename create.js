@@ -23,8 +23,7 @@ file.on('line',function(line) {
     lastName: info[1],
     zip: info[2],
     history: info[3]
-    });
-  );
+    }));
 });
 
 file.on('close', funciton(){
