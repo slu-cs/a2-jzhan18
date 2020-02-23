@@ -16,22 +16,20 @@ const file = readline.createInterface ({
 const voters = [];
 
 // Asynchronous line-by-line input
-file.on('line')
-  .then(function(line) {
-    const info = line.split(',');
-    voters.push(new Voter({
-      firstName: info[0],
-      lastName: info[1],
-      zip: info[2],
-      history: info[3]
-      });
-    )
-    return file.on('close');
+file.on('line',function(line) {
+  const info = line.split(',');
+  voters.push(new Voter({
+    firstName: info[0],
+    lastName: info[1],
+    zip: info[2],
+    history: info[3]
+    });
   )
-  .then(function() {
+});
+
+file.on('close', funciton(){
     process.exit(0);
-  })
-  .catch(error => console.error(error.stack));
+})
 
 // Delete any previous data
 mongoose.connection.dropDatabase(function() {
