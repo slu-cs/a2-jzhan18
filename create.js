@@ -3,15 +3,14 @@
 const mongoose = require('mongoose');
 const connect = require('./db');
 const Voter = require('./schema');
-
-connect(); // To the database
-
 const readline = require('readline');
 const fs = require('fs');
 // File configuration
 const file = readline.createInterface ({
   input: fs.createReadStream('voters.csv')
 });
+
+connect(); // To the database
 // Create voters
 const voters = [];
 
