@@ -23,7 +23,7 @@ file.on('line')
       firstName: info[0],
       lastName: info[1],
       zip: info[2],
-      history: info[3])
+      history: info[3]
       });
     )
     return file.on('close');
