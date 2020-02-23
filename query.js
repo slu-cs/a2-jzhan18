@@ -8,30 +8,26 @@ connect(); // To the database
 
 // What documents are in the collection?
 const queries = [
-
-  // What are names in alphabetical order?
-  Voter.find().sort('name'),
-
-  // Who started most recently?
-  Voter.find().sort('-started').limit(1),
-
-  // Who started in 2003?
-  Voter.find().where('started').equals(2003),
-
-  // Who teaches 362?
-  Voter.find().where('courses').in(362),
-
-  // What are all the ranks?
-  Voter.distinct('rank')
+  // How many registered voters live in the Canton zip code (13617)?
+  Voter.find().where('zip').equals(13617);
+  // What are the full names of all the registered voters whose first-name is STARR?
+  Voter.find().where('firstName').equals(STARR);
+  // How many people voted in the 2016 general election (GE16)?
+  Voter.find().where('history').in('GE16');
+  // What is the last-name that comes last in the county in alphabetical order?
+  Voter.find().sort('-lastName').limit(1);
+  // How many zip codes does the county contain?
+  Voter.distinct('zip');
 ];
+
 
 // Run the queries in parallel
 Promise.all(queries)
   .then(function(results) {
-    console.log('Names in order: ', results[0].map(p => p.name));
-    console.log('Started most recently: ', results[1].map(p => p.name));
-    console.log('Started in 2003: ', results[2].map(p => p.name));
-    console.log('Teaches 362: ', results[3].map(p => p.name));
-    console.log('Distinct ranks: ', results[4]);
+    console.log('Number of voters live in the Canton zip code (13617): ', results[0].length);
+    console.log('Full names of all the registered voters whose first-name is STARR: ', results[1].map(p => p.firstName + ' ' + p.lastName));
+    console.log('Number of people voted in the 2016 general election: ', results[2].length);
+    console.log('Last-name that comes last in the county in alphabetical order: ', results[3].lastName);
+    console.log('Number of zip codes the county contain: ', results[4].length);
     mongoose.connection.close();
   }).catch(error => console.error(error.stack));
