@@ -2,7 +2,7 @@
 
 const mongoose = require('mongoose');
 const connect = require('./db');
-const Voter = require('./shcema');
+const Voter = require('./schema');
 
 connect(); // To the database
 
