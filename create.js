@@ -26,6 +26,9 @@ file.on('line',function(line) {
     }));
 });
 
+file.on('close', function() {
+  process.exit(0);
+});
 
 mongoose.connection.dropDatabase()
   .then(() => voters.map(v => v.save()))
