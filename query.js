@@ -9,9 +9,9 @@ connect(); // To the database
 // What documents are in the collection?
 const queries = [
   // How many registered voters live in the Canton zip code (13617)?
-  Voter.find().where('zip').equals(13617);
+  Voter.find().where('zip').equals('13617');
   // What are the full names of all the registered voters whose first-name is STARR?
-  Voter.find().where('firstName').equals(STARR);
+  Voter.find().where('firstName').equals('STARR');
   // How many people voted in the 2016 general election (GE16)?
   Voter.find().where('history').in('GE16');
   // What is the last-name that comes last in the county in alphabetical order?
