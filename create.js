@@ -25,10 +25,9 @@ file.on('line',function(line) {
     }));
 });
 
-const saves = voters.map(v => v.save());
 file.on('close', function() {
   mongoose.connection.dropDatabase()
-    .then(() => Promise.all(saves))
+    .then(() => Promise.all(voters.map(v => v.save())))
     .then(() => mongoose.connection.close())
     .then(() => console.log('Database is ready.'))
     .catch(error => console.error(error.stack));
